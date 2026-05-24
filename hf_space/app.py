@@ -9,13 +9,13 @@ def get_plot(plot_name):
 css = """
 h1 {
     text-align: center;
-    color: #2ECC71;
+    color: #2ECC71 !important;
 }
 h2, h3 {
-    color: #3498DB;
+    color: #3498DB !important;
 }
 .stat-box {
-    background-color: #f8f9fa;
+    background-color: #f8f9fa !important;
     border-radius: 10px;
     padding: 20px;
     margin: 10px;
@@ -23,13 +23,13 @@ h2, h3 {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 .stat-number {
-    font-size: 2em;
-    font-weight: bold;
-    color: black;
+    font-size: 2em !important;
+    font-weight: bold !important;
+    color: #000000 !important;
 }
 .stat-label {
-    font-size: 1.1em;
-    color: #black;
+    font-size: 1.1em !important;
+    color: #333333 !important;
 }
 """
 
