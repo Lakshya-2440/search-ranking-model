@@ -1,14 +1,16 @@
 # Search Ranking Model — LambdaMART Learning-to-Rank
 
+[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/la7shya/search-ranking-model)
+
 A production-grade learning-to-rank system that uses **LambdaMART** (XGBoost) to rank search results by relevance, incorporating user signals (CTR, dwell time, skip rate) alongside traditional text-matching features.
 
 ## Key Results
 
 | Metric | BM25 Baseline | LambdaMART | Improvement |
 |--------|:------------:|:----------:|:-----------:|
-| NDCG@10 | ref | — | **+18%** |
-| MRR | ref | — | **+10%** |
-| MAP | ref | — | **+15%** |
+| **NDCG@10** | 0.4020 | 0.6292 | **+56.5%** |
+| **MRR** | 0.3498 | 0.6289 | **+79.8%** |
+| **MAP** | 0.3307 | 0.6283 | **+89.9%** |
 
 ## Project Structure
 
@@ -102,4 +104,5 @@ After running, find results in `outputs/`:
 ## Resume Bullets
 
 - Built a learning-to-rank model using LambdaMART on 2M+ query-doc pairs
-- Improved NDCG@10 by 18% over BM25 baseline in offline evaluation
+- Improved NDCG@10 by 56.5% over BM25 baseline in offline evaluation
+- Designed an interactive metrics dashboard deployed via Hugging Face Spaces
