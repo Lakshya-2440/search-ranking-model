@@ -1,0 +1,92 @@
+# Search Ranking Model Configuration
+
+data:
+  n_queries: 50000
+  n_documents: 200000
+  n_pairs: 2000000
+  min_query_freq: 10
+  random_seed: 42
+  output_dir: "data/"
+
+  # Label extraction thresholds (seconds)
+  labels:
+    grade_4_dwell: 60    # Long click + return
+    grade_3_dwell: 30    # Click + medium dwell
+    grade_2_dwell: 10    # Click + short dwell
+    grade_1_dwell: 0     # Click + very short dwell
+    grade_0: "skip"       # No click
+
+split:
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  time_based: true
+
+features:
+  query:
+    - tfidf_score
+    - bm25_score
+    - query_length_words
+    - query_length_chars
+    - query_type  # navigational=0, informational=1, transactional=2
+
+  document:
+    - pagerank
+    - freshness_days
+    - title_match_exact
+    - title_match_partial
+    - title_overlap_ratio
+    - anchor_text_match
+    - doc_length_norm
+    - url_depth
+
+  interaction:
+    - ctr
+    - avg_dwell_time
+    - skip_rate
+    - position_bias_correction
+    - historical_ctr
+
+model:
+  bm25:
+    k1: 1.5
+    b: 0.75
+
+  lambdamart:
+    objective: "rank:ndcg"
+    learning_rate: 0.05
+    n_estimators: 1000
+    max_depth: 6
+    subsample: 0.8
+    colsample_bytree: 0.8
+    min_child_weight: 10
+    gamma: 0.1
+    reg_alpha: 0.1
+    reg_lambda: 1.0
+    early_stopping_rounds: 50
+    eval_metric:
+      - "ndcg@5"
+      - "ndcg@10"
+    tree_method: "hist"
+    random_state: 42
+
+evaluation:
+  ndcg_cutoffs: [1, 5, 10]
+  ablation_feature_groups:
+    - query
+    - document
+    - interaction
+
+serving:
+  shadow:
+    n_test_queries: 1000
+  ab_test:
+    traffic_split: 0.05
+    duration_days: 14
+    significance_level: 0.05
+
+output:
+  model_dir: "outputs/models/"
+  plots_dir: "outputs/plots/"
+  results_dir: "outputs/results/"
+  logs_dir: "outputs/logs/"
