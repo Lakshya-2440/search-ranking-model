@@ -100,9 +100,3 @@ After running, find results in `outputs/`:
 - `outputs/models/` — Saved LambdaMART model
 - `outputs/plots/` — All visualizations (PNG)
 - `outputs/results/` — Metric JSONs
-
-## Resume Bullets
-
-- Built a learning-to-rank model using LambdaMART on 2M+ query-doc pairs
-- Improved NDCG@10 by 56.5% over BM25 baseline in offline evaluation
-- Designed an interactive metrics dashboard deployed via Hugging Face Spaces
